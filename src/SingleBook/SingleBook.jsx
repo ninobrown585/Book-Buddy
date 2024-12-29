@@ -33,7 +33,7 @@ else{
         <div className="topCard">
         <div className="card">
         <figure>
-            <img src={book.coverimage} alt={book.name} />
+            <img className="card" src={book.coverimage} alt={book.name} />
         </figure>
         <div className="container">
         <h3>

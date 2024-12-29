@@ -1,3 +1,4 @@
+import { useSelector} from 'react-redux'
 import { useState } from 'react'
 import bookLogo from './assets/books.png'
 import Nav from './components/Navigations'
@@ -8,7 +9,7 @@ import SingleBook from './SingleBook/SingleBook'
 import Login from './components/Login'
 
 function App() {
-  const [token, setToken] = useState(null)
+  const token = useSelector(state => state.token);
   const[selectedBookId, setSelectedBookId] = useState();
 
   return (
