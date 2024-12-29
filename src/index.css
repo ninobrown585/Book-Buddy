@@ -10,4 +10,51 @@ body {
   margin-right: 10px;
 }
 
-/* Add your own custom styles here */
+
+.card {
+  
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 550px;
+  margin: 2;
+  text-align: center;
+  font-family: arial;
+  justify-content: space-between;
+  border-radius: 20px;
+  transform: rotate(2deg);
+}
+
+img {
+  color: grey;
+  font-size: 22px;
+}
+
+.card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #c2b1b1;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+  transform: rotateY(60deg);
+  transform-style: preserve-3d;
+}
+
+.card button:hover {
+  opacity: 0.8;
+  transform: skewX(30deg)
+  
+  
+}
+
+ul{
+  
+  display: flex;
+  padding-left: 10p;
+  margin-left: 10px;
+ 
+  
+}
+
