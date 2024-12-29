@@ -47,13 +47,6 @@ return (
                 placeholder="Search Books Here..."
                 onChange={event => setQuery(event.target.value)}></textarea>
             </div>
-            {/* <input 
-            type="text"
-            id="outlined-basic"
-                variant="outlined"
-                label="Search"
-                placeholder="Search Books Here..."
-                onChange={event => setQuery(event.target.value)} /> */}
             <h2>Books In The Libary</h2>
             {/* {!books && (<p> Failed to load books from api</p>)} */}
             
@@ -68,7 +61,7 @@ return (
                         })
                             .map((p) => {
                                 return (
-                                    <ul key ={p.id}>
+                                    <ul className="topCard" key ={p.id}>
                                     <div className="card" >
                                     {/* <img src={p.coverimage} alt={p.name} style="width:100%"/> */}
                                     <img src={p.coverimage} alt={p.name} />
