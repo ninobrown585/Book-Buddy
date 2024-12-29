@@ -30,21 +30,24 @@ else if (isLoading) {
 else{
     $details =(
         <>
+        <div className="topCard">
+        <div className="card">
         <figure>
             <img src={book.coverimage} alt={book.name} />
         </figure>
+        <div className="container">
         <h3>
             {book.title} by {book.author}
         </h3>
         <h4>{book.description}</h4>
         <p> {data.book.available ? "true" : "false"}</p>
         <button onClick={() => navigate("/books")}>Back</button>
-        
+        </div></div></div>
         </>
     );
 }
 return(
-    <aside>
+    <aside className="card">
         <h2>Selected Book</h2>
         {$details}
     </aside>

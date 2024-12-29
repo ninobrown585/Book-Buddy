@@ -64,7 +64,7 @@ return (
                                     <ul className="topCard" key ={p.id}>
                                     <div className="card" >
                                     {/* <img src={p.coverimage} alt={p.name} style="width:100%"/> */}
-                                    <img src={p.coverimage} alt={p.name} />
+                                    <img className="card" src={p.coverimage} alt={p.name} />
                                     <div className="container">
                                         <h4>{p.title} by {p.author} #{p.id}</h4>
                                         <button onClick={() => seeBookDetails(p.id)}> See {p.title} Details</button>
