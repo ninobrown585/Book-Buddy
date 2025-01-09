@@ -7,39 +7,82 @@ import { useRegisterMutation } from "./RegisterSlice";
 
 
 export default function Register() {
-    const [form, setForm] = useState ({ email: "", password: ""});
-    // const navigate = useNavigate();
-    const [registerUser] = useRegisterMutation();
-
-    const change = (e) => {
-        setForm((prev) => ({
-            ...prev,
-            [e.target.name]: e.target.value,
-        }));
-    };
-    const submit = async (e) => {
-        e.preventDefault();
-        try{
-            const response = await registerUser(form).unwrap();
-            console.log(response);
-            // Navigate("/users");
-        }catch (error) {
-            console.error(error);
-        }
-    };
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState(null);
+    const [token, setToken] = useState("");
+  
+    async function handleSubmit(event) {
+      event.preventDefault();
+  
+      try {
+        const response = await fetch(
+          "https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/register",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              firstname: firstName,
+              lastname: lastName,
+              email: email,
+              password: password,
+            }),
+          }
+        );
+        const result = await response.json();
+        console.log(result);
+        sessionStorage.setToken("token", result.token);
+        setIsLoggedIn(true);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  
     return (
-        <div>
-            <form onSubmit={submit}>
-  <div className="form-group">
-    <label>Email address</label>
-    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
-  </div>
-  <div className="form-group">
-    <label>Password</label>
-    <input type="password" className="form-control" id="exampleInputPassword1"/>
-  </div>
-  <button type="submit" className="btn btn-primary">Submit</button>
-</form>
+      <>
+        <div className="formBox">
+          <h2 id="RegisterHead">Register!</h2>
+          {error && <p>{error}</p>}
+          <form onSubmit={handleSubmit}>
+            <label id="formLabel">
+              Firstname:{""}
+              <input
+                type="text"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              ></input>
+            </label>
+            <label id="formLabel">
+              Lastname:{""}
+              <input
+                type="text"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              ></input>
+            </label>
+            <label id="formLabel">
+              Email:{""}
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              ></input>
+            </label>
+            <label id="formLabel">
+              Password:{""}
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              ></input>
+            </label>
+            <button id="signUpButton">Register!</button>
+          </form>
         </div>
-    )
-}
+      </>
+    );
+  };
