@@ -1,88 +1,121 @@
-/* TODO - add your code to create a functional React component that renders a registration form */
+import { useState } from "react"
+// import axios from "axios"
+import { useNavigate } from "react-router-dom"
+import { Stack, Button, Paper, TextField, Typography, Link } from "@mui/material";
+import { useRegisterMutation } from "../../store/api";
 
-import { useState } from "react";
-import axios from "axios";
-// import useNavigate from "react-router-dom";
-import { useRegisterMutation } from "./RegisterSlice";
-
-
-export default function Register() {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState(null);
-    const [token, setToken] = useState("");
+const Login = ({setToken}) => {
+  const [register, { isLoading }] = useRegisterMutation();
   
-    async function handleSubmit(event) {
+  const navigate = useNavigate();
+
+
+  // should be either login or register, to match the API routes
+  const [type, setType] = useState("register");
+  // form fields
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
+
+
+
+
+  const handleSubmit = async (event) => {
+
       event.preventDefault();
-  
-      try {
-        const response = await fetch(
-          "https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/register",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              firstname: firstName,
-              lastname: lastName,
-              email: email,
-              password: password,
-            }),
-          }
-        );
-        const result = await response.json();
-        console.log(result);
-        sessionStorage.setToken("token", result.token);
-        setIsLoggedIn(true);
-      } catch (error) {
-        console.error(error);
+
+      if (type === "register") {
+          // pass the new user data stored in react state
+          await register({ firstname, lastname, email, password });
+          navigate("/account")
       }
-    }
-  
-    return (
-      <>
-        <div className="formBox">
-          <h2 id="RegisterHead">Register!</h2>
-          {error && <p>{error}</p>}
-          <form onSubmit={handleSubmit}>
-            <label id="formLabel">
-              Firstname:{""}
-              <input
-                type="text"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-              ></input>
-            </label>
-            <label id="formLabel">
-              Lastname:{""}
-              <input
-                type="text"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-              ></input>
-            </label>
-            <label id="formLabel">
-              Email:{""}
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              ></input>
-            </label>
-            <label id="formLabel">
-              Password:{""}
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              ></input>
-            </label>
-            <button id="signUpButton">Register!</button>
-          </form>
-        </div>
-      </>
-    );
-  };
+
+  }
+
+    return(
+      <Paper elevation={6} sx={{ width: "35%", padding: 4, margin: "14px auto" }}>
+      <form onSubmit={handleSubmit}>
+          <Stack direction="column">
+              <Typography
+                  variant="h5"
+                  sx={{ textAlign: "center" }}
+              >
+                  {type === "Register"}
+              </Typography>
+              {type === "register" && <TextField
+                  label="First Name"
+                  onChange={e => setFirstname(e.target.value)}
+                  value={firstname}
+                  sx={{ margin: "8px 0" }}
+              />}
+              {type === "register" && <TextField
+                  label="Last Name"
+                  onChange={e => setLastname(e.target.value)}
+                  value={lastname}
+                  sx={{ margin: "8px 0" }}
+              />}
+              <TextField
+                  label="Email"
+                  onChange={e => setEmail(e.target.value)}
+                  value={email}
+                  sx={{ margin: "8px 0" }}
+              />
+
+              <TextField
+                  label="Password"
+                  onChange={e => setPassword(e.target.value)}
+                  value={password}
+                  sx={{ margin: "8px 0" }}
+                  type="password"
+              />
+              {type === "register" && <TextField
+                  label="Re-Enter Password"
+                  onChange={e => setRepeatPassword(e.target.value)}
+                  value={repeatPassword}
+                  type="password"
+                  sx={{ margin: "8px 0" }}
+                  error={!!(password && repeatPassword && password !== repeatPassword)}
+                  helperText={password && repeatPassword && password !== repeatPassword ? "Password must match" : null}
+              />}
+          </Stack>
+          <Button
+              variant="contained"  color="secondary"
+              size="small"
+              sx={{ margin: "8px 0", width: "40%" }}
+              type="submit"
+          >
+              {type === "Register"} Register
+          </Button>
+          <Button
+              variant="contained" color="error"
+              size="small"
+              sx={{ margin: "8px 0", width: "70%" }}
+              type="submit"
+              onClick={() => {
+                
+                navigate('/login')}}
+          >
+              {/* {type === "login"} */} Login
+          </Button>
+          {/* {type === "login"
+              ? (
+                  <Typography>Need to create an account?{" "}
+                      <Link href="#" onClick={() => setType("register")}>
+                          Register</Link>
+                  </Typography>
+              ) : (
+                  <Typography>Already have an account?{" "}
+                      <Link href="#" onClick={() => setType("login")}>
+                          Log In</Link>
+                  </Typography>
+              )
+          } */}
+      </form>
+  </Paper>
+    )
+
+}
+
+export default Login

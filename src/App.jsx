@@ -26,7 +26,7 @@ function App() {
         <Nav />
         <Routes>
           <Route path="/" element ={<Books />} />
-          <Route path="/register" element ={<Login type="register" />} />
+          <Route path="/register" element ={<Register type="register" />} />
           <Route path= "/books" element ={<Books />} />
           <Route path= "/books/:id" element ={<SingleBook />} />
           <Route path="/login" element={<Login type="login" />} />
