@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 // import { useGetSingleBookQuery } from "./SingleBookSlice";
 import {useGetBookQuery} from "../components/Books/BooksSLice";
+import ReserveButton from "../components/ReserveButton";
 
 export default function SingleBook(selectedBookId, setSelectedBookId) {
     const navigate = useNavigate()
@@ -50,6 +51,7 @@ return(
     <aside className="card">
         <h2>Selected Book</h2>
         {$details}
+        <ReserveButton bookId={book.id} />
     </aside>
 )
 
