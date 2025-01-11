@@ -59,7 +59,7 @@ export default function Nav() {
               horizontal: 'left',
             }}
           >
-            <Link onClick={handleClose} component={RouterLink} to="/books">Home</Link>
+            <Link onClick={handleClose} component={RouterLink} to="/books">Books</Link>
             {token && <Link onClick={handleClose} component={RouterLink} to="/account">Account</Link>}
           </Link>
                 </nav>           

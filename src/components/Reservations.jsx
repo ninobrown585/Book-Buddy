@@ -1,6 +1,6 @@
 //this route returns a list of books the current user has checked out.
 
-import { useGetBookReservationsQuery, useReturnBookMutation} from "../redux/api";
+import { useGetBookReservationsQuery, useReturnBookMutation} from "../store/api";
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
@@ -24,30 +24,27 @@ const Reservations = () => {
   }
 
   return (
-      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+    <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           {data.reservation.length > 0 ? data.reservation.map(reservation => (
               <Grid key={reservation.id} item xs={3}>
-                  <Card>
-                      <CardContent>
-                          <Typography variant="h6" component="div">
-                              {reservation.title}
-                          </Typography>
-                          <Typography variant="subtitle1" component="div">
-                              {reservation.author}
-                          </Typography>
-                          {reservation.coverimage && <img width={120} src={reservation.coverimage} />}
-                      </CardContent>
-                      <CardActions>
-                          <Button variant="contained" onClick={() => returnBook(reservation.id)}>Return</Button>
-                      </CardActions>
-                  </Card>
+                  <div className="topCard" >
+              <div className="card">
+              <figure>
+                  <img className="card" src={reservation.coverimage} alt={reservation.name} />
+              </figure>
+              <div className="container">
+              <h3>
+                  {reservation.title} by {reservation.author}
+              </h3>
+              <button onClick={() => returnBook(reservation.id)}>Book Return</button>
+              </div></div></div>
               </Grid>
           )): (
               <Grid container alignItems="center" justifyContent="center" sx={{marginTop:4}}>
-                  <Typography variant="body2">No books checked out! <Link component={RouterLink} to="/books">View All Books.</Link></Typography>
+                  <Typography variant="body2">No books in collection</Typography>
               </Grid>
           )}
-      </Grid>
+          </Grid>
   )
 }
 
