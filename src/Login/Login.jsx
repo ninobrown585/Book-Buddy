@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { Stack, Button, Paper, TextField, Typography, Link } from "@mui/material";
 import {  useLoginMutation } from "../store/api";
 
-const Login = ({setToken}) => {
+const Login = () => {
   
   const [login] = useLoginMutation();
   const navigate = useNavigate();
@@ -40,7 +40,7 @@ const Login = ({setToken}) => {
                   variant="h5"
                   sx={{ textAlign: "center" }}
               >
-                  {/* {type === "login"} */}
+                  {/* {type === "login"} */}Press Enter After Input
               </Typography>
               <TextField
                   label="Email"
@@ -65,7 +65,7 @@ const Login = ({setToken}) => {
               type="submit"
               onClick={handleSubmit}
           >
-              {/* {type === "login"} */} Login
+              {type === "login"} Login
           </Button>
           
           <Button
@@ -73,25 +73,11 @@ const Login = ({setToken}) => {
               size="small"
               sx={{ margin: "8px 0", width: "70%" }}
               type="submit"
-              onClick={() => {
-                
+              onClick={() => {              
                 navigate('/register')}}
           >
-              {/* {type === "login"} */} Register
+              Register
           </Button>
-          {/* {type === "login"
-              ? (
-                  <Typography>Need to create an account?{" "}
-                      <Link href="#" onClick={() => setType("register")}>
-                          Register</Link>
-                  </Typography>
-              ) : (
-                  <Typography>Already have an account?{" "}
-                      <Link href="#" onClick={() => setType("login")}>
-                          Log In</Link>
-                  </Typography>
-              )
-          } */}
       </form>
   </Paper>
     )

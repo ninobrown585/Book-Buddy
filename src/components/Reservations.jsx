@@ -1,16 +1,11 @@
 //this route returns a list of books the current user has checked out.
 
 import { useGetBookReservationsQuery, useReturnBookMutation} from "../store/api";
-import CardActions from '@mui/material/CardActions';
-import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 
 import Alert from '@mui/material/Alert';
 import Typography from '@mui/material/Typography';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Link from '@mui/material/Link';
-import {Link as RouterLink} from "react-router-dom"
+
 const Reservations = () => {
   const {data, isLoading, error} = useGetBookReservationsQuery();
   const [returnBook] = useReturnBookMutation();
@@ -40,7 +35,7 @@ const Reservations = () => {
               </div></div></div>
               </Grid>
           )): (
-              <Grid container alignItems="center" justifyContent="center" sx={{marginTop:4}}>
+              <Grid container alignItems="center" justifyContent="center" sx={{marginTop:8}}>
                   <Typography variant="body2">No books in collection</Typography>
               </Grid>
           )}

@@ -88,7 +88,7 @@ const Login = ({setToken}) => {
           >
               {type === "Register"} Register
           </Button>
-          <Button
+          {/* <Button
               variant="contained" color="error"
               size="small"
               sx={{ margin: "8px 0", width: "70%" }}
@@ -97,21 +97,8 @@ const Login = ({setToken}) => {
                 
                 navigate('/login')}}
           >
-              {/* {type === "login"} */} Login
-          </Button>
-          {/* {type === "login"
-              ? (
-                  <Typography>Need to create an account?{" "}
-                      <Link href="#" onClick={() => setType("register")}>
-                          Register</Link>
-                  </Typography>
-              ) : (
-                  <Typography>Already have an account?{" "}
-                      <Link href="#" onClick={() => setType("login")}>
-                          Log In</Link>
-                  </Typography>
-              )
-          } */}
+               Login
+          </Button> */}
       </form>
   </Paper>
     )
