@@ -36,7 +36,7 @@ const Reservations = () => {
               </Grid>
           )): (
               <Grid container alignItems="center" justifyContent="center" sx={{marginTop:8}}>
-                  <Typography variant="body2">No books in collection</Typography>
+                  <Typography variant="body2">Please add books to your collection when ready.</Typography>
               </Grid>
           )}
           </Grid>
